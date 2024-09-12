@@ -364,7 +364,10 @@ export class HaEntityPicker extends LitElement {
     const displayedName = [deviceName, entityName].filter(Boolean).join(" ⸱ ");
 
     // Do not include device name if it's the same as entity name
-    const entityContext = [entityName ? deviceName : undefined, areaName]
+    const entityContext = [
+      entityName !== deviceName ? deviceName : undefined,
+      areaName,
+    ]
       .filter(Boolean)
       .join(" ⸱ ");
 
@@ -377,7 +380,7 @@ export class HaEntityPicker extends LitElement {
         areaName ?? "",
         deviceName ?? "",
       ].filter(Boolean),
-      entity_name: entityName || deviceName,
+      entity_name: entityName,
       entity_context: entityContext,
     };
   }

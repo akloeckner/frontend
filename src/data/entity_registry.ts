@@ -41,6 +41,7 @@ export interface EntityRegistryDisplayEntryResponse {
     tk?: string;
     hb?: boolean;
     dp?: number;
+    hn?: boolean;
   }[];
   entity_categories: Record<number, EntityCategory>;
 }

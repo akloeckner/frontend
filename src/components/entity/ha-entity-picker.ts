@@ -8,6 +8,7 @@ import { computeDomain } from "../../common/entity/compute_domain";
 import {
   computeEntityAreaName,
   computeEntityDeviceName,
+  computeEntityFullName,
   computeEntityName,
 } from "../../common/entity/compute_entity_name";
 import { caseInsensitiveStringCompare } from "../../common/string/compare";
@@ -361,7 +362,11 @@ export class HaEntityPicker extends LitElement {
 
     const entityName = computeEntityName(stateObj, hass.entities, hass.devices);
 
-    const displayedName = [deviceName, entityName].filter(Boolean).join(" ⸱ ");
+    const displayedName = computeEntityFullName(
+      stateObj,
+      hass.entities,
+      hass.devices
+    );
 
     // Do not include device name if it's the same as entity name
     const entityContext = [
@@ -373,10 +378,10 @@ export class HaEntityPicker extends LitElement {
 
     return {
       ...stateObj,
-      displayed_name: displayedName,
+      displayed_name: displayedName ?? "",
       strings: [
         stateObj.entity_id,
-        displayedName,
+        displayedName ?? "",
         areaName ?? "",
         deviceName ?? "",
       ].filter(Boolean),
